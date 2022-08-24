@@ -2,7 +2,14 @@
   <!-- visual -->
   <section class="visual">
 
-    <Swiper class="sw-visual">
+    <Swiper :modules="modules" :autoplay="{
+      delay: 2000,
+      disableOnInteraction:false,}" :loop="true" :navigation="{
+      nextEl: '.sw-visual-next',
+      prevEl: '.sw-visual-prev' 
+      }" class="sw-visual">
+
+
       <SwiperSlide class="swiper-slide">
         <a href="#" class="sw-visual-1"></a>
       </SwiperSlide>
@@ -15,19 +22,19 @@
       <SwiperSlide class="swiper-slide">
         <a href="#" class="sw-visual-4"></a>
       </SwiperSlide>
-    </Swiper>
-    <!-- 슬라이드 좌우버튼 -->
-    <button class="sw-visual-prev"></button>
-    <button class="sw-visual-next"></button>
+      <!-- 슬라이드 좌우버튼 -->
+      <button class="sw-visual-prev"></button>
+      <button class="sw-visual-next"></button>
 
+
+    </Swiper>
   </section>
 </template>
 
-<script>
+<script >
   import {
     Autoplay,
     Navigation,
-    Pagination
   } from 'swiper';
   import {
     Swiper,
@@ -45,14 +52,13 @@
         modules: [
           Autoplay,
           Navigation,
-          Pagination
         ]
       }
     }
   }
 </script>
 
-<style>
+<style scoped>
   /* visual */
   .visual {
     position: relative;

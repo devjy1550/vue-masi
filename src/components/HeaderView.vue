@@ -290,19 +290,19 @@
     color: #999;
   }
 
-  @media all and (max-width:1080px) {
+  @media all and (max-width:1110px) {
     .menu>li {
       padding: 0 30px;
     }
   }
 
-  @media all and (max-width: 960px) {
+  @media all and (max-width: 1000px) {
     .menu>li {
       padding: 0 20px;
     }
   }
 
-  @media all and (max-width: 850px) {
+  @media all and (max-width: 890px) {
     .logo {
       width: 140px;
     }
@@ -316,7 +316,7 @@
     }
   }
 
-  @media all and (max-width: 760px) {
+  @media all and (max-width: 780px) {
     .menu>li {
       padding: 0 15px;
     }
@@ -327,7 +327,7 @@
 
   }
 
-  @media all and (max-width: 700px) {
+  @media all and (max-width: 725px) {
     .logo {
       position: absolute;
       left: 50%;
