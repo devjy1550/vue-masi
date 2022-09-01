@@ -15,6 +15,20 @@
 
         <div class="gnb">
           <ul class="menu">
+            <li v-for="(item, index) in menudata" :key="index">
+              <!-- <a href="메인링크">메인내용</a> -->
+              <a :href="item.mainlink">{{item.mainstr}}</a>
+              <ul class="submenu">
+                <!-- <li v-for="(item, index) in menudata" :key="index"> 여기서 sub의 내용이 필요하기땜에 menudata에서 item.sub에서 불러온다는 의미를 써주고
+                  뭐와뭐를 가져온다는 item, index조차도 sub를붙여줌으로써 기존 main의 녀석들과 차이점을 둠-->
+                <li v-for="(subitem, subindex) in item.sub" :key="subindex">
+                  <!-- <a href="서브링크">서브내용</a> -->
+                  <a :href="subitem.sublink">{{subitem.substr}}</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <!--    <ul class="menu">
             <li>
               <a href="#">마시그래이</a>
               <ul class="submenu">
@@ -69,7 +83,7 @@
                 <li><a href="#">케이터링</a></li>
               </ul>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </div>
@@ -79,11 +93,26 @@
 <script>
   import $ from 'jquery';
   import {
-    onMounted
+    onMounted,
+    computed //추가
   } from 'vue';
+  import {
+    useStore
+  } from 'vuex'
 
   export default {
+    // props: ['menudata'],             store.js로 가면서 얘도 필요없어짐
+
+
+
+
     setup() {
+      //vuex의 모든기능을 쓰려고 생성
+      const store = useStore();
+      //vuex의 state 변화감시
+      const menudata = computed(()=> store.getters.getMenuData);
+      
+      
       onMounted(() => {
         // 메인 메뉴 기능
         let header = $('.header');
@@ -116,6 +145,7 @@
 
       return {
         onMounted
+        ,menudata
       }
     }
   }
