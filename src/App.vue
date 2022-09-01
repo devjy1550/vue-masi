@@ -24,9 +24,11 @@
   import Franchiser from '@/components/FranchiserView.vue'
   import SNS from '@/components/SNSView.vue'
   import Footer from '@/components/FooterView.vue'
-  import {
-    ref
-  } from 'vue'
+  // import {
+  //   ref
+  // } from 'vue'
+
+  import axios from 'axios'
 
 
   export default {
@@ -44,11 +46,19 @@
     },
 
     setup() {
+      //외부에 있는 메뉴데이터.json 파일을 불러옴
+      axios.get('/data/menu.json')
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(err => console.log(err))
+
+
       //메뉴데이터
-      const menuData = ref([]);
+      // const menuData = ref([]);
       //ref로 생성했다면, value로 받아줘야함
-    
-        // menuData.value =   ㅁㅁㅁ이것도 생략가능
+
+      // menuData.value =   ㅁㅁㅁ이것도 생략가능
       /* 이건 store.js로 옮겨버림  ㅁㅁㅁㅁ
       [{
           mainstr: '마시그래이',
@@ -111,7 +121,7 @@
       */
 
       return {
-        menuData
+        // menuData
       }
     }
   }
