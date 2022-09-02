@@ -28,7 +28,12 @@
   //   ref
   // } from 'vue'
 
-  import axios from 'axios'
+  // 공통으로 관리되는 state를 참조함
+  // actions를 호출하는 용도로 사용됨
+  // vuex 를 참조하는 객체를 접근하려고 하면 아래구문으로 접근함
+  import { useStore } from 'vuex'
+
+  // import axios from 'axios'  store.js로 옮겨주면서 필요없어짐
 
 
   export default {
@@ -46,12 +51,28 @@
     },
 
     setup() {
+      //외부에 있는 메뉴데이터.json 파일을 불러오기위해 actions를 활용
+      const store = useStore();
+
+      //actions의 메소드(function)을 사용할때
+      //store.dispatch('메소드명)
+      // console.log('step 1 : dispatch')
+      store.dispatch('fetchMenuData');
+
+
+
+
+
+      /*
       //외부에 있는 메뉴데이터.json 파일을 불러옴
       axios.get('/data/menu.json')
       .then(response => {
         console.log(response.data);
       })
       .catch(err => console.log(err))
+      */
+
+
 
 
       //메뉴데이터

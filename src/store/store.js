@@ -4,11 +4,16 @@ import {
 
 //모든 view파일에서 공유될 state(데이터) 관리목적
 
+
+import axios from 'axios'
+
 // export default createStore(); 가능
 export default createStore({
   // state는 데이터를 모아서 관리하는 객체
   state: {
-    menuData: [{   // 이렇게 받아줄게 MenuData라는걸 적어줘야함
+    menuData: [
+      /*
+      {   // 이렇게 받아줄게 MenuData라는걸 적어줘야함
         mainstr: '마시그래이',
         mainlink: '#',
         sub: [{
@@ -121,15 +126,45 @@ export default createStore({
           }
         ]
       }
+            */
     ]
   },
   // actions는 서버 및 파일연동   (성공실패 체크후 mutations 실행)
-  actions: {},
+  actions: {
+    //메뉴데이터 json 로딩
+    // fetchMenuData(context) {
+
+    fetchMenuData({commit}) {
+      //외부에 있는 메뉴데이터.json 파일을 불러옴
+      axios.get('/data/menu.json')
+        .then(response => {
+          // 서버 또는 파일이 결과가 있을때,
+          // console.log(response.data);
+          // console.log("axios : ", response.data);
+          // console.log('step2 : axios', response.data);
+          //mutations를 실행하라
+          // context.commit();   
+          // commit()
+          commit('MENU_DATA_INIT', response.data);
+        })
+        .catch(err => console.log(err));
+    }
+
+  },
   // mutations는 state(데이터) 업데이트 처리
-  mutations: {},
+  mutations: {
+    MENU_DATA_INIT(state, payload){
+ 
+      // console.log('mutation', payload)
+      // console.log('step3 : mutation', payload);
+     state.menuData = payload
+    }
+  },
   // getters는 state를 컴포넌트에 전달, 컴포넌트의 computed 처리
   getters: {
     getMenuData(state) {
+      // console.log('step4 : getters');
+
       return state.menuData
     }
   }
